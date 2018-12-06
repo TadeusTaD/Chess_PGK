@@ -1,0 +1,7 @@
+Build
+.collabignore
+.vs
+Library
+obj
+Packages
+Temp
