@@ -5,13 +5,15 @@ using UnityEngine;
 public enum Mode { blocked, idle, readyToMove, pickField }
 public class GameManager : MonoBehaviour
 {
+
     public Player whitePlayer, blackPlayer;
     public GameObject turnIndicator;
+    public GameObject blur;
 
     public Field[,] board;
 
     public GameObject cardPrefabsObject;
-    private List<GameObject> cardPrefabs = new List<GameObject>();
+    public List<GameObject> cardPrefabs = new List<GameObject>();
 
     public Mode gameMode = Mode.blocked;
 
@@ -62,8 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        cameraRotationPoint = GameObject.Find("Camera Rotation Point").gameObject;
 
+        cameraRotationPoint = GameObject.Find("Camera Rotation Point").gameObject;
         PrepareCards();
         PrepareBoard();
         PreparePlayers();
@@ -78,13 +80,14 @@ public class GameManager : MonoBehaviour
 
     private void PrepareCards()
     {
-        for (int i=0;i<cardPrefabsObject.transform.childCount; i++)
+        for (int i = 0; i < cardPrefabsObject.transform.childCount; i++)
         {
             cardPrefabs.Add(cardPrefabsObject.transform.GetChild(i).gameObject);
         }
     }
     private void PrepareBoard()
     {
+        blur.GetComponent<SpriteRenderer>().enabled = true;
         List<Field> fields = GetAllFields();
         List<ChessPiece> pieces = GetAllPieces();
 
@@ -205,13 +208,14 @@ public class GameManager : MonoBehaviour
                 onMouseMove = OnCardMove;
                 onMouseClick = OnCardClick;
             }
-        } catch (System.NullReferenceException)
+        }
+        catch (System.NullReferenceException)
         {
             // Trafiono w pustke
             onMouseMove = OnVoidMove;
             onMouseClick = OnVoidClick;
         }
-        
+
 
         onMouseMove(hit);
         if (Input.GetMouseButtonDown(0) && gameMode != Mode.blocked)
@@ -250,6 +254,7 @@ public class GameManager : MonoBehaviour
         else if (gameMode == Mode.idle)
         {
             onBoardHit = SelectField;
+
         }
         else if (gameMode == Mode.readyToMove)
         {
@@ -259,7 +264,7 @@ public class GameManager : MonoBehaviour
         {
             //onBoardHit = PickField;
         }
-        
+
         onBoardHit(hit);
     }
     private void OnCardMove(RaycastHit hit)
@@ -281,7 +286,7 @@ public class GameManager : MonoBehaviour
         //print("Card CLICKED");
 
         try
-        { 
+        {
             onCardHit(hit);
         }
         catch (System.NullReferenceException) { }
@@ -292,7 +297,7 @@ public class GameManager : MonoBehaviour
     {
         // Kliknieto w pustke
         // TODO - Zresetowac wskazniki
-        
+
         ResetIndicators();
 
         try
@@ -407,8 +412,8 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator MoveWithAttack(Field start, Field destination, Field newPosition)
     {
-        CameraShake.power += (float) start.piece.attack / (float)150 ;
-        print("Camera shook, "+CameraShake.power+" "+start.piece.attack);
+        CameraShake.power += (float)start.piece.attack / (float)150;
+        print("Camera shook, " + CameraShake.power + " " + start.piece.attack);
         CameraShake.shakeEnabled = true;
 
         StartCoroutine(MoveOnlyGraphical(start.piece, (int)destination.transform.position.x, (int)destination.transform.position.y));
@@ -482,7 +487,7 @@ public class GameManager : MonoBehaviour
         if (whiteTurn)
             turn++;
         GetPlayer().OnTurnChange();
-        StartCoroutine(RotateTurnIndicator());
+        // StartCoroutine(RotateTurnIndicator());
     }
     private IEnumerator RotateTurnIndicator()
     {
