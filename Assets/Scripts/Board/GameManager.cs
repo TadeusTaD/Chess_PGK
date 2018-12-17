@@ -5,15 +5,13 @@ using UnityEngine;
 public enum Mode { blocked, idle, readyToMove, pickField }
 public class GameManager : MonoBehaviour
 {
-
     public Player whitePlayer, blackPlayer;
     public GameObject turnIndicator;
-    public GameObject blur;
 
     public Field[,] board;
 
     public GameObject cardPrefabsObject;
-    public List<GameObject> cardPrefabs = new List<GameObject>();
+    private List<GameObject> cardPrefabs = new List<GameObject>();
 
     public Mode gameMode = Mode.blocked;
 
@@ -41,7 +39,7 @@ public class GameManager : MonoBehaviour
     public Field activeField
     {
         get
-        { 
+        {
             return _activeField;
         }
         set
@@ -63,9 +61,9 @@ public class GameManager : MonoBehaviour
     private BaseCard enlargedCard;
 
     public void Start()
-    { 
-
+    {
         cameraRotationPoint = GameObject.Find("Camera Rotation Point").gameObject;
+
         PrepareCards();
         PrepareBoard();
         PreparePlayers();
@@ -87,7 +85,6 @@ public class GameManager : MonoBehaviour
     }
     private void PrepareBoard()
     {
-        blur.GetComponent<SpriteRenderer>().enabled = true;
         List<Field> fields = GetAllFields();
         List<ChessPiece> pieces = GetAllPieces();
 
@@ -253,7 +250,6 @@ public class GameManager : MonoBehaviour
         else if (gameMode == Mode.idle)
         {
             onBoardHit = SelectField;
-           
         }
         else if (gameMode == Mode.readyToMove)
         {
@@ -359,7 +355,7 @@ public class GameManager : MonoBehaviour
                     Attack(activeField, hit.collider.transform.GetComponent<Field>());
                 }
                 ResetIndicators();
-                gameMode = Mode.idle;   
+                gameMode = Mode.idle;
                 SwitchTurns();
                 return;
             }
@@ -486,7 +482,7 @@ public class GameManager : MonoBehaviour
         if (whiteTurn)
             turn++;
         GetPlayer().OnTurnChange();
-       // StartCoroutine(RotateTurnIndicator());
+        StartCoroutine(RotateTurnIndicator());
     }
     private IEnumerator RotateTurnIndicator()
     {
