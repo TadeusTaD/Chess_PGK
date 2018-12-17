@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Board\BackToMenuButton.cs" />
      <Compile Include="Assets\Scripts\Board\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\Board\CardAnimation.cs" />
      <Compile Include="Assets\Scripts\Board\Cards\AddMana.cs" />
      <Compile Include="Assets\Scripts\Board\Cards\AoeDamage.cs" />
      <Compile Include="Assets\Scripts\Board\Cards\AoeHeal.cs" />
