@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum CardMode { small, enlarging, big, downscaling};
+public enum CardMode { small, enlarging, big, downscaling, onEnterBlur, selectedBlur};
 public abstract class BaseCard : MonoBehaviour {
 
     private CardMode mode;
@@ -18,23 +18,30 @@ public abstract class BaseCard : MonoBehaviour {
 
     private float enlargeScale = 0;
     private float time = 0;
+    private bool chooseCardMoment=true;
+    private bool isSelected = false;
 
     private Color redColor = new Color(255f / 255, 0f / 255, 0f / 255);
     private Color greenColor = new Color(0f / 255, 255f / 255, 0f / 255);
     private Color yellowColor = new Color(255f / 255, 255f / 255, 0f / 255);
+    private Color whiteColor = new Color(255f / 255, 255f / 255, 255f / 255);
     private Color positiveColor;
+    private Color onMouseColor;
+    private Color selectedColor;
     private Color negativeColor;
 
     public void Awake()
     {
         positiveColor = greenColor;
         negativeColor = redColor;
+        onMouseColor = whiteColor;
+        selectedColor = yellowColor;
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void Update()
     {
-        if (blur != null)
+        if (blur != null && mode!=CardMode.onEnterBlur && mode != CardMode.selectedBlur)
         {
             if (manaCost <= manager.GetPlayer().manaPool)
             {
@@ -47,6 +54,15 @@ public abstract class BaseCard : MonoBehaviour {
                 blur.color = new Color(negativeColor.r, negativeColor.g, negativeColor.b, (0.75f + (Mathf.Sin(time) / 4)));
             }
         }
+        else if(blur != null && mode == CardMode.onEnterBlur)
+        {
+                 blur.color = new Color(onMouseColor.r, onMouseColor.g, onMouseColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        }
+        else
+        {
+                blur.color = new Color(selectedColor.r, selectedColor.g, selectedColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        }
+
         if (time <= 314f)
             time += 0.05f;
         else
@@ -55,16 +71,52 @@ public abstract class BaseCard : MonoBehaviour {
 
     public void OnMouseEnter()
     {
-        print("Weszlo");
-        mode = CardMode.enlarging;
-        StartCoroutine(Enlarge());
+        if (chooseCardMoment)
+        {
+            mode = CardMode.onEnterBlur;
+            Debug.Log("ZMIEN KOLOR NA BIAŁY!");
+        }
+        else
+        {
+            print("Weszlo");
+            mode = CardMode.enlarging;
+            StartCoroutine(Enlarge());
+        }
 
     }
+
+    public void OnMouseDown()
+    {
+        if (!isSelected)
+        {
+            mode = CardMode.selectedBlur;
+            manager.GetComponent<GameManager>().selectedCards.Add(this.gameObject);
+            Debug.Log("ZMIEN KOLOR NA ZOLTY!");
+            isSelected = true;
+        }
+        else
+        {
+            mode = CardMode.small;
+            manager.GetComponent<GameManager>().selectedCards.Remove(this.gameObject);
+            Debug.Log("ZMIEN KOLOR ZNOWU NA ZIELONY!");
+            isSelected = false;
+        }
+    }
+
+
     public void OnMouseExit()
     {
-        print("Opuszczono");
-        mode = CardMode.downscaling;
-        StartCoroutine(Downscale());
+        if (!isSelected)
+        {
+            print("Opuszczono");
+            mode = CardMode.downscaling;
+            StartCoroutine(Downscale());
+        }
+        else if (isSelected)
+        {
+            mode = CardMode.selectedBlur;
+            isSelected = true;
+        }
     }
     public void ActivateColor()
     {
@@ -97,6 +149,8 @@ public abstract class BaseCard : MonoBehaviour {
 
 
     }
+
+
 
     public abstract void ActivateEffect(GameManager manager);
     public void MoveToGraveyard()

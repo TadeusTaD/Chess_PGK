@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     public Player whitePlayer, blackPlayer;
+    public List<GameObject> selectedCards;  //przechowuje karty ktore zostaly zaznaczone do wymiany
     public GameObject turnIndicator;
     public GameObject blur;
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-
+        selectedCards.Clear();
         cameraRotationPoint = GameObject.Find("Camera Rotation Point").gameObject;
         PrepareCards();
         PrepareBoard();

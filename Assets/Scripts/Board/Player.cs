@@ -116,11 +116,16 @@ public class Player : MonoBehaviour
     }
     public void MulliganDrawButton()
     {
-        DerenderHand();
-        PrepareCards(cardPrefabs);
-        Debug.Log("Muliganuj!");
-        RenderHand();
-        Debug.Log("KOnec muliganu");
+        //DerenderHand();
+        //PrepareCards(cardPrefabs);
+        //Debug.Log("Muliganuj!");
+        //RenderHand();
+        //Debug.Log("KOnec muliganu");
+        for(int i=0; i< manager.GetComponent<GameManager>().selectedCards.Count; i++)
+        {
+            Destroy(manager.GetComponent<GameManager>().selectedCards[i].gameObject);
+        }
+
         StartCoroutine(HideMulliganWindow());
     }
     public void MulliganStayButton()
@@ -132,7 +137,7 @@ public class Player : MonoBehaviour
         manager.gameMode = Mode.idle;
         mulligan.GetComponentInChildren<Text>().text = "OK, I'm out!";
         blur.GetComponent<SpriteRenderer>().enabled = false;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
             mulligan.transform.localPosition += new Vector3(0, -0.1f, 0);
             yield return new WaitForSeconds(0);
