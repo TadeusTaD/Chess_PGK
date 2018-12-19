@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
 
             cardParents.SetActive(true);
             cardParents.GetComponent<CardAnimation>().startAnimation();
+            if(manager.gameMode == Mode.blocked) cardParents.GetComponent<CardAnimation>().setIdleAnimation(true);
             obj.gameObject.SetActive(true);
 
         }
@@ -116,6 +117,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator ShowMulliganWindow()
     {
+        blur.GetComponent<SpriteRenderer>().enabled = true;
         mulligan.GetComponentInChildren<Text>().text = "Wybrane karty do wymiany:";
         //for (int i=0;i<10;i++)
         //{
@@ -159,6 +161,8 @@ public class Player : MonoBehaviour
         manager.gameMode = Mode.idle;
         mulligan.GetComponentInChildren<Text>().text = "OK, I'm out!";
         blur.GetComponent<SpriteRenderer>().enabled = false;
+        cardParents.GetComponent<CardAnimation>().setIdleAnimation(false);
+        cardParents.GetComponent<CardAnimation>().stopIdleAnimation();
         for (int i = 0; i < 100; i++)
         {
             mulligan.transform.localPosition += new Vector3(0, -0.1f, 0);

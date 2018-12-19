@@ -22,4 +22,15 @@ public class CardAnimation : MonoBehaviour
     {
         anim.SetBool("animParam", true);
     }
+
+    public void setIdleAnimation(bool state)
+    {
+        anim.SetBool("mulligan", state);
+    }
+    public void stopIdleAnimation()
+    {
+        anim.Play("ChooseCardIdle", 0, 0);
+        anim.speed = 0;
+        
+    }
 }
