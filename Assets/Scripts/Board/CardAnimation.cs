@@ -11,12 +11,15 @@ public class CardAnimation : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        anim.SetBool("animParam", true);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void startAnimation()
+    {
+        anim.SetBool("animParam", true);
     }
 }

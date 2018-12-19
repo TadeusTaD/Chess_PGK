@@ -489,7 +489,7 @@ public class GameManager : MonoBehaviour
         if (whiteTurn)
             turn++;
         GetPlayer().OnTurnChange();
-        // StartCoroutine(RotateTurnIndicator());
+        StartCoroutine(RotateTurnIndicator());
     }
     private IEnumerator RotateTurnIndicator()
     {

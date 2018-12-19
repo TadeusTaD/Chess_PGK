@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
 
     public GameManager manager;
     public GameObject mulligan;
+    public GameObject cardParents;
+    private List<Transform> cardParentNodes = new List<Transform>();
 
     public Player()
     {
@@ -71,20 +73,24 @@ public class Player : MonoBehaviour
     public void RenderHand()
     {
         DerenderHand();
-        float offset = 4f / (hand.Count - 1);
-        int parentNumber = 1;
+        //float offset = 4f / (hand.Count - 1);
+        int parentNumber = 0;
+        cardParentNodes.Clear();
+        foreach (Transform o in cardParents.transform)
+        {
+            cardParentNodes.Add(o);
+        }
         foreach (GameObject obj in hand)
         {
-            if (isWhite == true)
-            {
-               obj.transform.localPosition = GameObject.Find("parent" + parentNumber.ToString()).transform.localPosition;
-               obj.transform.SetParent(GameObject.Find("parent" + parentNumber.ToString()).transform, false);
-               // obj.transform.localPosition = new Vector3(0, 0, 0);
+
+               
+               obj.transform.localPosition = new Vector3(0,0,0);
+               obj.transform.SetParent(cardParentNodes[parentNumber], false);
 
                 parentNumber++;
                 //obj.transform.localScale = new Vector3(obj.transform.localScale.x , obj.transform.localScale.y , obj.transform.localScale.z);
                 // obj.transform.localPosition = new Vector3(1.0f + offset * hand.IndexOf(obj), -6.0f, (-(float)hand.IndexOf(obj) / 100) - 4);
-            }
+            
 
             //else
             //{
@@ -92,6 +98,8 @@ public class Player : MonoBehaviour
             //    obj.transform.rotation = new Quaternion(0, 0, 180, 0);
             //}
 
+            cardParents.SetActive(true);
+            cardParents.GetComponent<CardAnimation>().startAnimation();
             obj.gameObject.SetActive(true);
 
         }
@@ -99,6 +107,7 @@ public class Player : MonoBehaviour
     }
     public void DerenderHand()
     {
+        cardParents.SetActive(false);
         foreach (GameObject obj in hand)
         {
             //obj.transform.localPosition += new Vector3(100, 100, 1);
@@ -125,16 +134,15 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < hand.Count; i++)
         {
-            int parentID = i + 1;
             if (manager.GetComponent<GameManager>().selectedCards.Contains(hand[i]))
             {
-                foreach (Transform child in GameObject.Find("parent" + parentID.ToString()).transform)
+                foreach (Transform child in cardParentNodes[i])
                 {
                     Destroy(child.gameObject);
                 }
                 hand[i] = deck[0];
                 deck.Remove(deck[0]);
-                hand[i].transform.SetParent(GameObject.Find("parent" + parentID.ToString()).transform, false);
+                hand[i].transform.SetParent(cardParentNodes[i], false);
                 hand[i].transform.localPosition = new Vector3(0, 0, 0);
                 hand[i].SetActive(true);
             }
@@ -154,7 +162,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             mulligan.transform.localPosition += new Vector3(0, -0.1f, 0);
-            GameObject.Find("Parents").transform.localPosition += new Vector3(0.06f, -0.02f, 0);
+            cardParents.transform.localPosition += new Vector3(0.06f, -0.02f, 0);
             yield return new WaitForSeconds(0);
         }
     }
