@@ -121,12 +121,26 @@ public class Player : MonoBehaviour
         //Debug.Log("Muliganuj!");
         //RenderHand();
         //Debug.Log("KOnec muliganu");
-        for(int i=0; i< manager.GetComponent<GameManager>().selectedCards.Count; i++)
-        {
-            Destroy(manager.GetComponent<GameManager>().selectedCards[i].gameObject);
-        }
 
+
+        for (int i = 0; i < hand.Count; i++)
+        {
+            int parentID = i + 1;
+            if (manager.GetComponent<GameManager>().selectedCards.Contains(hand[i]))
+            {
+                foreach (Transform child in GameObject.Find("parent" + parentID.ToString()).transform)
+                {
+                    Destroy(child.gameObject);
+                }
+                hand[i] = deck[0];
+                deck.Remove(deck[0]);
+                hand[i].transform.SetParent(GameObject.Find("parent" + parentID.ToString()).transform, false);
+                hand[i].transform.localPosition = new Vector3(0, 0, 0);
+                hand[i].SetActive(true);
+            }
+        }
         StartCoroutine(HideMulliganWindow());
+
     }
     public void MulliganStayButton()
     {
@@ -140,6 +154,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             mulligan.transform.localPosition += new Vector3(0, -0.1f, 0);
+            GameObject.Find("Parents").transform.localPosition += new Vector3(0.06f, -0.02f, 0);
             yield return new WaitForSeconds(0);
         }
     }

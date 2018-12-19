@@ -71,7 +71,7 @@ public abstract class BaseCard : MonoBehaviour {
 
     public void OnMouseEnter()
     {
-        if (chooseCardMoment)
+        if (manager.gameMode == Mode.blocked)
         {
             mode = CardMode.onEnterBlur;
             Debug.Log("ZMIEN KOLOR NA BIAŁY!");
