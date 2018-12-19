@@ -146,17 +146,16 @@ public abstract class BaseCard : MonoBehaviour {
             this.transform.Find("Canvas").transform.localPosition -= new Vector3(0, 0.1f, -1f);
             yield return new WaitForSeconds(0);
         }
-
-
     }
-
-
 
     public abstract void ActivateEffect(GameManager manager);
     public void MoveToGraveyard()
     {
         manager.GetPlayer().hand.Remove(this.gameObject);
-        this.gameObject.SetActive(false);
+        manager.GetPlayer().graveyard.Add(this.gameObject);
+        //this.gameObject.SetActive(false);
+        transform.position = new Vector3(15f, 5.5f - (float)manager.GetPlayer().graveyard.IndexOf(this.gameObject) / 10, -(float)manager.GetPlayer().graveyard.IndexOf(this.gameObject) / 100);
+        blur.transform.localScale -= new Vector3(1, 1, 0);
         manager.GetPlayer().RenderHand();
     }
     public GameObject Copy()

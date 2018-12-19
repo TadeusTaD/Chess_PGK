@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
             //}
 
             obj.gameObject.SetActive(true);
-
         }
 
     }
@@ -118,9 +117,9 @@ public class Player : MonoBehaviour
     {
         //DerenderHand();
         //PrepareCards(cardPrefabs);
-        //Debug.Log("Muliganuj!");
+        //Debug.Log("Mulliganuj!");
         //RenderHand();
-        //Debug.Log("KOnec muliganu");
+        //Debug.Log("Koniec muliganu");
 
 
         for (int i = 0; i < hand.Count; i++)
