@@ -418,11 +418,12 @@ public class GameManager : MonoBehaviour
         CameraShake.shakeEnabled = true;
 
         StartCoroutine(MoveOnlyGraphical(start.piece, (int)destination.transform.position.x, (int)destination.transform.position.y));
-        yield return new WaitForSeconds(0.3f);
-        MovePiece(start, newPosition);
 
+        yield return new WaitForSeconds(0.3f);
         CameraShake.shakeEnabled = false;
         CameraShake.power -= start.piece.attack / 100;
+        MovePiece(start, newPosition);
+
     }
 
     public void PickField(RaycastHit hit)

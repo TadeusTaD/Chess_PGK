@@ -25,10 +25,10 @@ public class CameraShake : MonoBehaviour {
 	void Update () {
 		if (shakeEnabled)
         {
-            if (duration >0)
+            if (duration >0.1f)
             {
                 camera.localPosition = startPos + Random.insideUnitSphere * power;
-                duration -= Time.deltaTime * slowDownAmount;
+                duration -= Time.deltaTime * slowDownAmount + 0.12f;
             }
             else
             {
@@ -37,5 +37,5 @@ public class CameraShake : MonoBehaviour {
                 camera.localPosition = startPos;
             }
         }
-	}
+    }
 }
