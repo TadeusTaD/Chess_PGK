@@ -11,12 +11,26 @@ public class CardAnimation : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        anim.SetBool("animParam", true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    public void startAnimation()
+    {
+        anim.SetBool("animParam", true);
+    }
+
+    public void setIdleAnimation(bool state)
+    {
+        anim.SetBool("mulligan", state);
+    }
+    public void stopIdleAnimation()
+    {
+        anim.Play("ChooseCardIdle", 0, 0);
+        anim.speed = 0;
         
     }
 }

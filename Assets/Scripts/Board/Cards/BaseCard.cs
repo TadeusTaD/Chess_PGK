@@ -87,7 +87,7 @@ public abstract class BaseCard : MonoBehaviour {
 
     public void OnMouseDown()
     {
-        if (!isSelected)
+        if (!isSelected && manager.gameMode == Mode.blocked)
         {
             mode = CardMode.selectedBlur;
             manager.GetComponent<GameManager>().selectedCards.Add(this.gameObject);
