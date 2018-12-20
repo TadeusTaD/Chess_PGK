@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+	public enum Type { Human, External, Bot }
 
+	public Type type;
+	public BotAI ai;
     public GameObject blur;
     public bool isWhite;
     public Text manaIndicator;
@@ -189,16 +192,23 @@ public class Player : MonoBehaviour
         manager.GetPlayer(!manager.whiteTurn).DerenderHand();
 
         if (manager.turn == 1)
-        {
-            manager.gameMode = Mode.blocked;
-            StartCoroutine(ShowMulliganWindow());
-        }
+		{
+			manager.gameMode = Mode.blocked;
+			StartCoroutine(ShowMulliganWindow());
+
+			if (type == Type.Bot)
+				MulliganStayButton();
+
+		}
         else
         {
             DrawCard();
         }
 
-        RenderHand();
+		if (type == Type.Bot)
+			StartCoroutine(ai.MakeMove(manager));
+
+		RenderHand();
     }
 
     public void DrawCard()

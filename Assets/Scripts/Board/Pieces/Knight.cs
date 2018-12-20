@@ -85,5 +85,21 @@ public class Knight : ChessPiece
     public override Field GetPositionAfterAttack(Field[,] board, Field destination)
     {
         return board[currentX, currentY];
-    }
+	}
+
+	private static readonly float[,] strategicValues =
+		{
+			{ -50,-40,-30,-30,-30,-30,-40,-50, },
+			{ -40,-20,  0,  0,  0,  0,-20,-40, },
+			{ -30,  0, 10, 15, 15, 10,  0,-30, },
+			{ -30,  5, 15, 20, 20, 15,  5,-30, },
+			{ -30,  0, 15, 20, 20, 15,  0,-30, },
+			{ -30,  5, 10, 15, 15, 10,  5,-30, },
+			{ -40,-20,  0,  5,  5,  0,-20,-40, },
+			{ -50,-40,-30,-30,-30,-30,-40,-50, },
+		};
+	public override float GetStrategicValue(Vector2Int position, int hp, int attack)
+	{
+		return 32 * (10 + hp + attack) + strategicValues[position.x, isWhite ? position.y ^ 7 : position.y];
+	}
 }

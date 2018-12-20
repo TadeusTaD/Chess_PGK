@@ -163,31 +163,47 @@ public class Queen : ChessPiece
 
         return possibleMoves;
     }
-    public override Field GetPositionAfterAttack(Field[,] board, Field destination)
-    {
-        if (currentX == destination.transform.position.x)
-        {
-            // Atakujemy w pionie
-            if (Mathf.Abs(currentY - destination.transform.position.y) <= 2)
-                return board[currentX, currentY];
-            else
-                return board[currentX, (int)(destination.transform.position.y + (2 * (currentY - destination.transform.position.y) / Mathf.Abs(currentY - destination.transform.position.y)))];
-        }
-        else if (currentY == destination.transform.position.y)
-        {
-            // Atakujemy w poziomie
-            if (Mathf.Abs(currentX - destination.transform.position.x) <= 2)
-                return board[currentX, currentY];
-            else
-                return board[(int)(destination.transform.position.x + (2 * (currentX - destination.transform.position.x) / Mathf.Abs(currentX - destination.transform.position.x))), (int)destination.transform.position.y];
-        }
-        else if (Mathf.Abs(currentX - destination.transform.position.x) <= 2)
-        {
-            return board[currentX, currentY];
-        }
-        else
-        {
-            return board[(int)(destination.transform.position.x + (2 * (currentX - destination.transform.position.x) / Mathf.Abs(currentX - destination.transform.position.x))), (int)(destination.transform.position.y + (2 * (currentY - destination.transform.position.y) / Mathf.Abs(currentY - destination.transform.position.y)))];
-        }
-    }
+	public override Field GetPositionAfterAttack(Field[,] board, Field destination)
+	{
+		if (currentX == destination.transform.position.x)
+		{
+			// Atakujemy w pionie
+			if (Mathf.Abs(currentY - destination.transform.position.y) <= 2)
+				return board[currentX, currentY];
+			else
+				return board[currentX, (int)(destination.transform.position.y + (2 * (currentY - destination.transform.position.y) / Mathf.Abs(currentY - destination.transform.position.y)))];
+		}
+		else if (currentY == destination.transform.position.y)
+		{
+			// Atakujemy w poziomie
+			if (Mathf.Abs(currentX - destination.transform.position.x) <= 2)
+				return board[currentX, currentY];
+			else
+				return board[(int)(destination.transform.position.x + (2 * (currentX - destination.transform.position.x) / Mathf.Abs(currentX - destination.transform.position.x))), (int)destination.transform.position.y];
+		}
+		else if (Mathf.Abs(currentX - destination.transform.position.x) <= 2)
+		{
+			return board[currentX, currentY];
+		}
+		else
+		{
+			return board[(int)(destination.transform.position.x + (2 * (currentX - destination.transform.position.x) / Mathf.Abs(currentX - destination.transform.position.x))), (int)(destination.transform.position.y + (2 * (currentY - destination.transform.position.y) / Mathf.Abs(currentY - destination.transform.position.y)))];
+		}
+	}
+
+	private static readonly float[,] strategicValues =
+		{
+			{ -20,-10,-10, -5, -5,-10,-10,-20, },
+			{ -10,  0,  0,  0,  0,  0,  0,-10, },
+			{ -10,  0,  5,  5,  5,  5,  0,-10, },
+			{  -5,  0,  5,  5,  5,  5,  0, -5, },
+			{   0,  0,  5,  5,  5,  5,  0, -5, },
+			{ -10,  5,  5,  5,  5,  5,  0,-10, },
+			{ -10,  0,  5,  0,  0,  0,  0,-10, },
+			{ -20,-10,-10, -5, -5,-10,-10,-20, },
+		};
+	public override float GetStrategicValue(Vector2Int position, int hp, int attack)
+	{
+		return 90 * (10 + hp + attack) + strategicValues[position.x, isWhite ? position.y ^ 7 : position.y];
+	}
 }

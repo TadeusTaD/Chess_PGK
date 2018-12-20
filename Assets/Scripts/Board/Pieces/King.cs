@@ -86,8 +86,25 @@ public class King : ChessPiece
     public override Field GetPositionAfterAttack(Field[,] board, Field destination)
     {
         return board[currentX, currentY];
-    }
-    public override void DestroyPiece()
+	}
+
+	private static readonly float[,] strategicValues =
+		{
+			{ -30,-40,-40,-50,-50,-40,-40,-30, },
+			{ -30,-40,-40,-50,-50,-40,-40,-30, },
+			{ -30,-40,-40,-50,-50,-40,-40,-30, },
+			{ -30,-40,-40,-50,-50,-40,-40,-30, },
+			{ -20,-30,-30,-40,-40,-30,-30,-20, },
+			{ -10,-20,-20,-20,-20,-20,-20,-10, },
+			{  20, 20,  0,  0,  0,  0, 20, 20, },
+			{  20, 30, 10,  0,  0, 10, 30, 20, },
+		};
+	public override float GetStrategicValue(Vector2Int position, int hp, int attack)
+	{
+		return 20000 + 10 * hp + attack + strategicValues[position.x, isWhite ? position.y ^ 7 : position.y];
+	}
+
+	public override void DestroyPiece()
     {
         Destroy(this.gameObject);
         SceneManager.LoadScene("MainMenu");
