@@ -489,7 +489,7 @@ public class GameManager : MonoBehaviour
         if (whiteTurn)
             turn++;
         GetPlayer().OnTurnChange();
-        // StartCoroutine(RotateTurnIndicator());
+        StartCoroutine(RotateTurnIndicator());
     }
     private IEnumerator RotateTurnIndicator()
     {
@@ -497,16 +497,16 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 18; i++)
         {
             turnIndicator.transform.Rotate(0, 10, 0, Space.Self);
-            cameraRotationPoint.transform.Rotate(0, 0, 10, Space.Self);
-            foreach (ChessPiece piece in allChessPieces)
-            {
-                try
-                {
-                    piece.transform.Rotate(0, 0, 10, Space.Self);
-                }
-                catch (MissingReferenceException) { }
-                catch (System.Exception) { }
-            }
+            //cameraRotationPoint.transform.Rotate(0, 0, 10, Space.Self);
+            //foreach (ChessPiece piece in allChessPieces)
+            //{
+            //    try
+            //    {
+            //        piece.transform.Rotate(0, 0, 10, Space.Self);
+            //    }
+            //    catch (MissingReferenceException) { }
+            //    catch (System.Exception) { }
+            //}
             yield return new WaitForSeconds(0);
         }
     }
