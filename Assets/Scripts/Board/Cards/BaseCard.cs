@@ -41,29 +41,39 @@ public abstract class BaseCard : MonoBehaviour {
 
     public void Update()
     {
-        if (blur != null && mode!=CardMode.onEnterBlur && mode != CardMode.selectedBlur)
+        //if (blur != null && mode != CardMode.onEnterBlur && mode != CardMode.selectedBlur)
+        //{
+        //    if (manaCost <= manager.GetPlayer().manaPool)
+        //    {
+        //        blur.color = new Color(0f / 255, 255f / 255, 0f / 255, (0.75f + (Mathf.Sin(time) / 4)));
+        //        blur.color = new Color(positiveColor.r, positiveColor.g, positiveColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        //    }
+        //    else
+        //    {
+        //        blur.color = new Color(255f / 255, 0f / 255, 0f / 255, (0.75f + (Mathf.Sin(time) / 4)));
+        //        blur.color = new Color(negativeColor.r, negativeColor.g, negativeColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        //    }
+        //}
+        if(blur!= null && mode!= CardMode.onEnterBlur && mode != CardMode.selectedBlur)
         {
-            if (manaCost <= manager.GetPlayer().manaPool)
-            {
-                //blur.color = new Color(0f / 255, 255f / 255, 0f / 255, (0.75f + (Mathf.Sin(time) / 4)));
-                blur.color = new Color(positiveColor.r, positiveColor.g, positiveColor.b, (0.75f + (Mathf.Sin(time) / 4)));
-            }
-            else
-            {
-                //blur.color = new Color(255f / 255, 0f / 255, 0f / 255, (0.75f + (Mathf.Sin(time) / 4)));
-                blur.color = new Color(negativeColor.r, negativeColor.g, negativeColor.b, (0.75f + (Mathf.Sin(time) / 4)));
-            }
-        }
-        else if(blur != null && mode == CardMode.onEnterBlur)
-        {
-                 blur.color = new Color(onMouseColor.r, onMouseColor.g, onMouseColor.b, (0.75f + (Mathf.Sin(time) / 4)));
-        }
-        else
-        {
-                blur.color = new Color(selectedColor.r, selectedColor.g, selectedColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+            blur.enabled = false;
         }
 
-        if (time <= 314f)
+        else if(blur != null && mode == CardMode.onEnterBlur)
+        {
+            blur.enabled = true;
+            blur.color = new Color(positiveColor.r, positiveColor.g, positiveColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        }
+        else if (blur != null && mode == CardMode.selectedBlur)
+        {
+            blur.color = new Color(selectedColor.r, selectedColor.g, selectedColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+        }
+            //else
+            //{
+            //        blur.color = new Color(selectedColor.r, selectedColor.g, selectedColor.b, (0.75f + (Mathf.Sin(time) / 4)));
+            //}
+
+            if (time <= 314f)
             time += 0.05f;
         else
             time -= 0.05f;
