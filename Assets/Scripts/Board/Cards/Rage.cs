@@ -50,6 +50,7 @@ public class Rage : BaseCard
             }
         }
         manager.GetPlayer().manaPool -= manaCost;
+        gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
         MoveToGraveyard();
         CancelCardUse();
     }
