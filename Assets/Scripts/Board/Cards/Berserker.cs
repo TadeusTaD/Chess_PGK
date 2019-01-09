@@ -35,6 +35,7 @@ public class Berserker : BaseCard {
             hit.collider.transform.GetComponent<Field>().piece.attack += (int)(hit.collider.transform.GetComponent<Field>().piece.hp * convertRatio);
             hit.collider.transform.GetComponent<Field>().piece.hp = 1;
             manager.GetPlayer().manaPool -= manaCost;
+            gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
         CancelCardUse();

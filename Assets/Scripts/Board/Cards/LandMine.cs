@@ -37,6 +37,7 @@ public class LandMine : BaseCard
             ShowMarker(hit);
             manager.gameMode = Mode.idle;
             manager.GetPlayer().manaPool -= manaCost;
+            gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
 

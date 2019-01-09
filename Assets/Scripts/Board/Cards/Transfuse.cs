@@ -57,6 +57,7 @@ public class Transfuse : BaseCard {
             field2.piece.hp += transfuseValue;
 
             manager.GetPlayer().manaPool -= manaCost;
+            gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
 

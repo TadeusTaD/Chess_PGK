@@ -14,6 +14,7 @@ public class AddMana : BaseCard {
 
     public override void ActivateEffect(GameManager manager)
     {
+        gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
         this.manager = manager;
         if (manager.GetPlayer().manaPool < manaCost)
         {
