@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Mode { blocked, idle, readyToMove, pickField }
 public class GameManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> selectedCards;  //przechowuje karty ktore zostaly zaznaczone do wymiany
     public GameObject turnIndicator;
     public GameObject blur;
+
+    // Ekrany zaslaniajace obrot planszy
+    public RawImage whiteTurnImage;
+    public RawImage blackTurnImage;
 
     public Field[,] board;
 
@@ -372,6 +377,8 @@ public class GameManager : MonoBehaviour
     }
     private void MovePiece(Field start, Field destination)
     {
+        sleepValue = 0.7f;
+
         if (start != destination)
         {
             destination.piece = start.piece;
@@ -401,12 +408,12 @@ public class GameManager : MonoBehaviour
         bool ifDead = start.piece.DealDamageFromAttack(destination.piece);
         if (ifDead)
         {
-            sleepValue = 0.4f;
+            sleepValue = 0.85f;
             MovePiece(start, destination);
         }
         else
         {
-            sleepValue = 0.65f;
+            sleepValue = 1.15f;
             Field newPosition = start.piece.GetPositionAfterAttack(board, destination);
             StartCoroutine(MoveWithAttack(start, destination, newPosition));
         }
@@ -493,22 +500,61 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator RotateTurnIndicator()
     {
-        yield return new WaitForSeconds(sleepValue);
+        yield return new WaitForSeconds(sleepValue / 2);
+        StartCoroutine(ShowTurnCover());
+
+        yield return new WaitForSeconds(sleepValue / 2);
+
+
         for (int i = 0; i < 18; i++)
         {
             turnIndicator.transform.Rotate(0, 10, 0, Space.Self);
-            //cameraRotationPoint.transform.Rotate(0, 0, 10, Space.Self);
-            //foreach (ChessPiece piece in allChessPieces)
-            //{
-            //    try
-            //    {
-            //        piece.transform.Rotate(0, 0, 10, Space.Self);
-            //    }
-            //    catch (MissingReferenceException) { }
-            //    catch (System.Exception) { }
-            //}
+            cameraRotationPoint.transform.Rotate(0, 0, 10, Space.Self);
+            foreach (ChessPiece piece in allChessPieces)
+            {
+                try
+                {
+                    piece.transform.Rotate(0, 0, 10, Space.Self);
+                }
+                catch (MissingReferenceException) { }
+                catch (System.Exception) { }
+            }
             yield return new WaitForSeconds(0);
         }
+    }
+
+    private IEnumerator ShowTurnCover()
+    { 
+        RawImage img;
+        if (whiteTurn)
+            img = whiteTurnImage;
+        else
+            img = blackTurnImage;
+
+        for (int i = 0; i <= 10; i++)
+        {
+            img.color = new Color(1, 1, 1, 0.1f * i);
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        yield return new WaitForSeconds(1);
+        StartCoroutine(HideTurnCover());
+
+    }
+    private IEnumerator HideTurnCover()
+    {
+        RawImage img;
+        if (whiteTurn)
+            img = whiteTurnImage;
+        else
+            img = blackTurnImage;
+
+        for (int i = 10; i >= 0 ; i--)
+        {
+            img.color = new Color(1, 1, 1, 0.1f * i);
+            yield return new WaitForSeconds(0.02f);
+        }
+
     }
 
 
