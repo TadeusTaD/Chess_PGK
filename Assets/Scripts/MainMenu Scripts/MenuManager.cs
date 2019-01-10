@@ -11,11 +11,17 @@ public class MenuManager : MonoBehaviour {
 
 
     // Main menu functions
-    public void NewGame()
+    public void NewBotGame()
     {
         SceneManager.LoadScene("Board");
-    }
-    public void EndGame()
+		GameManager.gameType = Player.Type.Bot;
+	}
+	public void NewLocalGame()
+	{
+		SceneManager.LoadScene("Board");
+		GameManager.gameType = Player.Type.Human;
+	}
+	public void EndGame()
     {
         Application.Quit();
     }

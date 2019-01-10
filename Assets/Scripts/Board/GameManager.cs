@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public enum Mode { blocked, idle, readyToMove, pickField }
 public class GameManager : MonoBehaviour
 {
+	static public Player.Type gameType = Player.Type.Human;
 
     public Player whitePlayer, blackPlayer;
     public List<GameObject> selectedCards;  //przechowuje karty ktore zostaly zaznaczone do wymiany
@@ -190,8 +191,9 @@ public class GameManager : MonoBehaviour
     private void PreparePlayers()
     {
 		whitePlayer.type = Player.Type.Human;
-		blackPlayer.type = Player.Type.Bot;
-		blackPlayer.ai = new BotAI();
+		blackPlayer.type = gameType;
+		if (gameType == Player.Type.Bot)
+			blackPlayer.ai = new BotAI();
 
 		whitePlayer.isWhite = true;
         blackPlayer.isWhite = false;
