@@ -106,4 +106,20 @@ public class Rook : ChessPiece
         }
         throw new System.NotImplementedException();
     }
+
+	private static readonly float[,] strategicValues =
+		{
+			{   0,  0,  0,  0,  0,  0,  0,  0, },
+			{   5, 10, 10, 10, 10, 10, 10,  5, },
+			{  -5,  0,  0,  0,  0,  0,  0, -5, },
+			{  -5,  0,  0,  0,  0,  0,  0, -5, },
+			{  -5,  0,  0,  0,  0,  0,  0, -5, },
+			{  -5,  0,  0,  0,  0,  0,  0, -5, },
+			{  -5,  0,  0,  0,  0,  0,  0, -5, },
+			{   0,  0,  0,  5,  5,  0,  0,  0, },
+		};
+	public override float GetStrategicValue(Vector2Int position, int hp, int attack)
+	{
+		return 50 * (10 + hp + attack) + strategicValues[position.x, isWhite ? position.y ^ 7 : position.y];
+	}
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public enum Mode { blocked, idle, readyToMove, pickField }
 public class GameManager : MonoBehaviour
 {
+	static public Player.Type gameType = Player.Type.Human;
 
     public Player whitePlayer, blackPlayer;
     public List<GameObject> selectedCards;  //przechowuje karty ktore zostaly zaznaczone do wymiany
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
     }
     GameObject selectedFieldMark;
-    List<GameObject> possibleMovesMarks = new List<GameObject>();
+    public List<GameObject> possibleMovesMarks = new List<GameObject>();
 
 
     // Pola potrzene do obrotu planszy
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
             board[(int)field.transform.position.x, (int)field.transform.position.y] = field;
         }
     }
-    private List<Field> GetAllFields()
+	public List<Field> GetAllFields()
     {
         boardRotationPoint = GameObject.Find("Board Rotation Point");
         GameObject allFields = boardRotationPoint.transform.Find("Board").gameObject;
@@ -131,7 +132,7 @@ public class GameManager : MonoBehaviour
 
         return fields;
     }
-    private List<ChessPiece> GetAllPieces()
+    public List<ChessPiece> GetAllPieces()
     {
         GameObject pieces = boardRotationPoint.transform.Find("Pieces").gameObject;
 
@@ -189,7 +190,12 @@ public class GameManager : MonoBehaviour
 
     private void PreparePlayers()
     {
-        whitePlayer.isWhite = true;
+		whitePlayer.type = Player.Type.Human;
+		blackPlayer.type = gameType;
+		if (gameType == Player.Type.Bot)
+			blackPlayer.ai = new BotAI();
+
+		whitePlayer.isWhite = true;
         blackPlayer.isWhite = false;
 
         whitePlayer.PrepareCards(cardPrefabs);
@@ -326,58 +332,73 @@ public class GameManager : MonoBehaviour
         catch (System.NullReferenceException) { }
     }
 
-    private void SelectField(RaycastHit hit)
-    {
-        ResetIndicators();
+	private void SelectField(RaycastHit hit)
+	{
+		ResetIndicators();
+		selectedFieldMark = CreateCubeIndicator(hit.collider.transform.position.x, hit.collider.transform.position.y, Color.cyan);
 
-        activeField = hit.collider.transform.GetComponent<Field>();
-        selectedFieldMark = CreateCubeIndicator(hit.collider.transform.position.x, hit.collider.transform.position.y, Color.cyan);
+		gameMode = Mode.readyToMove;
 
-        gameMode = Mode.readyToMove;
+		ProcessSelectField(hit.collider.transform.GetComponent<Field>());
+	}
+	private void TryToMovePiece(RaycastHit hit)
+	{
+		Field field = hit.collider.transform.GetComponent<Field>();
+		if (field == null)
+			return;
+		bool moved = ProcessTryToMovePiece(field);
 
-        List<Vector2> possibleMoves = new List<Vector2>();
-        if (board[(int)hit.collider.transform.position.x, (int)hit.collider.transform.position.y].piece != null
-            && board[(int)hit.collider.transform.position.x, (int)hit.collider.transform.position.y].piece.isWhite == whiteTurn)
-        {
-            possibleMoves = board[(int)hit.collider.transform.position.x, (int)hit.collider.transform.position.y].piece.GetPossibleMoves(board);
-        }
+		//Gracz zaznaczyl inne pole
+		if (!moved)
+			SelectField(hit);
+	}
 
-        foreach (Vector2 move in possibleMoves)
-        {
-            if (board[(int)move.x, (int)move.y].piece == null)
-                possibleMovesMarks.Add(CreateCubeIndicator(move.x, move.y, Color.yellow));
-            else
-                possibleMovesMarks.Add(CreateCubeIndicator(move.x, move.y, Color.red));
-        }
+	public void ProcessSelectField(Field field)
+	{
+		activeField = field;
 
-    }
-    private void TryToMovePiece(RaycastHit hit)
-    {
-        foreach (GameObject field in possibleMovesMarks)
-        {
-            if (field.transform.position.x == hit.collider.transform.position.x && field.transform.position.y == hit.collider.transform.position.y)
-            {
-                if (hit.collider.transform.GetComponent<Field>().piece == null)
-                {
-                    // Move
-                    MovePiece(activeField, hit.collider.transform.GetComponent<Field>());
-                }
-                else
-                {
-                    // Attack
-                    Attack(activeField, hit.collider.transform.GetComponent<Field>());
-                }
-                ResetIndicators();
-                gameMode = Mode.idle;
-                SwitchTurns();
-                return;
-            }
-        }
+		List<Vector2> possibleMoves = new List<Vector2>();
+		if (field.piece != null
+			&& field.piece.isWhite == whiteTurn)
+		{
+			possibleMoves = field.piece.GetPossibleMoves(board);
+		}
 
-        //Gracz zaznaczyl inne pole
-        SelectField(hit);
-    }
-    private void MovePiece(Field start, Field destination)
+		foreach (Vector2 move in possibleMoves)
+		{
+			if (board[(int)move.x, (int)move.y].piece == null)
+				possibleMovesMarks.Add(CreateCubeIndicator(move.x, move.y, Color.yellow));
+			else
+				possibleMovesMarks.Add(CreateCubeIndicator(move.x, move.y, Color.red));
+		}
+	}
+	public bool ProcessTryToMovePiece(Field target)
+	{
+		var found = possibleMovesMarks.Find(
+			obj => obj.transform.position.x == target.gameObject.transform.position.x
+			&& obj.transform.position.y == target.gameObject.transform.position.y
+		);
+		if (found != null)
+		{
+			if (target.piece == null)
+			{
+				MovePiece(activeField, target);
+			}
+			else
+			{
+				Attack(activeField, target);
+			}
+
+			ResetIndicators();
+			gameMode = Mode.idle;
+			SwitchTurns();
+			return true;
+		}
+
+		return false;
+	}
+
+	private void MovePiece(Field start, Field destination)
     {
         sleepValue = 0.75f;
 

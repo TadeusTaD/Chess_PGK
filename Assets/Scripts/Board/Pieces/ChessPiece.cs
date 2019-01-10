@@ -95,7 +95,8 @@ public abstract class ChessPiece : MonoBehaviour {
     }
     public abstract List<Vector2> GetPossibleMoves(Field[,] board);
     public abstract Field GetPositionAfterAttack(Field[,] board, Field destination);
-    
+	public abstract float GetStrategicValue(Vector2Int position, int hp, int attack);
+
     public void UpdateIndicators()
     {
         hpIndicator.text = hp.ToString();
@@ -133,4 +134,8 @@ public abstract class ChessPiece : MonoBehaviour {
     {
         Destroy(this.gameObject);
     }
+	public virtual float GetCurrentStrategicValue()
+	{
+		return GetStrategicValue(new Vector2Int(currentX, currentY), hp, attack);
+	}
 }
