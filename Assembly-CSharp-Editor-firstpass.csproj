@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{F4311C96-30F5-0E42-0616-C02B196C6C68}</ProjectGuid>
+    <ProjectGuid>{2E2C9F9B-6B52-065B-4C98-51F8A4D9BF10}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
@@ -65,19 +65,19 @@
     <None Include="Assets\Plugins\GitHub\Editor\credits.txt" />
     <None Include="Assets\Plugins\GitHub\Editor\eula.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>J:/PGK/Chess_Repo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>J:/PGK/Chess_Repo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>J:/PGK/Chess_Repo/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>J:/PGK/Chess_Repo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>J:/PGK/Chess_Repo/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -314,46 +314,46 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="AsyncBridge.Net35">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
     </Reference>
     <Reference Include="GitHub.Api">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
     </Reference>
     <Reference Include="GitHub.Logging">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
     </Reference>
     <Reference Include="GitHub.Unity">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
     </Reference>
     <Reference Include="ReadOnlyCollectionsInterfaces">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
     </Reference>
     <Reference Include="sfw.net">
-      <HintPath>J:/PGK/Chess_Repo/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>J:/PGK/Chess_Repo/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>J:/PGK/Chess_PGK/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0f2/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
