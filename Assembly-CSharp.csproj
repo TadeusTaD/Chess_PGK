@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Board\Cards\AddMana.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\AoeDamage.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\AoeHeal.cs" />
+    <Compile Include="Assets\Scripts\Board\Cards\Arise.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\BaseCard.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\Berserker.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\DangerousArea.cs" />
