@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         {
             int rand = Random.Range(0, cardPrefabs.Count);
             deck.Add(cardPrefabs[rand].GetComponent<BaseCard>().Copy());
-            //deck[i].transform.SetParent(GameObject.Find("Camera Rotation Point").transform, false);
+            deck[i].transform.SetParent(GameObject.Find("Camera Rotation Point").transform, false);
         }
         for (int i = 0; i < 5; i++)
             DrawCard();
@@ -76,17 +76,17 @@ public class Player : MonoBehaviour
     public void RenderHand()
     {
         DerenderHand();
-        //float offset = 4f / (hand.Count - 1);
+        float offset = 4f / (hand.Count - 1);
         int parentNumber = 0;
-        cardParentNodes.Clear();
+        /*cardParentNodes.Clear();
         foreach (Transform o in cardParents.transform)
         {
             cardParentNodes.Add(o);
-        }
+        }*/
         foreach (GameObject obj in hand)
         {
              obj.transform.localPosition = new Vector3(0,0,0);
-            try
+            /*try
             {
                 obj.transform.SetParent(cardParentNodes[parentNumber], false);
             }
@@ -94,11 +94,12 @@ public class Player : MonoBehaviour
             {
                 print("EXCEPTION: DO NAPRAWIENIA");
                 print("Player: funkcja RenderHand()");
-            }
+            }*/
 
                 parentNumber++;
-                //obj.transform.localScale = new Vector3(obj.transform.localScale.x , obj.transform.localScale.y , obj.transform.localScale.z);
-                // obj.transform.localPosition = new Vector3(1.0f + offset * hand.IndexOf(obj), -6.0f, (-(float)hand.IndexOf(obj) / 100) - 4);
+                obj.transform.SetParent(GameObject.Find("Camera Rotation Point").transform);
+                obj.transform.localScale = new Vector3(obj.transform.localScale.x , obj.transform.localScale.y , obj.transform.localScale.z);
+                obj.transform.localPosition = new Vector3(5.0f + offset * hand.IndexOf(obj), -3f, (-(float)hand.IndexOf(obj) / 100) - 4);
             
 
             //else
@@ -107,20 +108,20 @@ public class Player : MonoBehaviour
             //    obj.transform.rotation = new Quaternion(0, 0, 180, 0);
             //}
 
-            cardParents.SetActive(true);
-            cardParents.GetComponent<CardAnimation>().startAnimation();
-            if(manager.gameMode == Mode.blocked) cardParents.GetComponent<CardAnimation>().setIdleAnimation(true);
+            //cardParents.SetActive(true);
+            //cardParents.GetComponent<CardAnimation>().startAnimation();
+            //if(manager.gameMode == Mode.blocked) cardParents.GetComponent<CardAnimation>().setIdleAnimation(true);
             obj.gameObject.SetActive(true);
         }
 
     }
     public void DerenderHand()
     {
-        cardParents.SetActive(false);
+        //cardParents.SetActive(false);
         foreach (GameObject obj in hand)
         {
-            //obj.transform.localPosition += new Vector3(100, 100, 1);
-            //obj.SetActive(false);
+            obj.transform.localPosition += new Vector3(100, 100, 1);
+            obj.SetActive(false);
         }
     }
     private IEnumerator ShowMulliganWindow()

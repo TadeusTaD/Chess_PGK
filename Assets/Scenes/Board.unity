@@ -875,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69858422}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 15.14, y: -1.209, z: 0}
+  m_LocalPosition: {x: 16.506, y: -1.209, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 688686612}
@@ -1419,6 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b31b7055921c4249a784d4b0051c615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   blur: {fileID: 722484945}
   isWhite: 0
   manaIndicator: {fileID: 559168922}
@@ -8479,7 +8480,7 @@ MonoBehaviour:
   sounds:
   - name: Theme
     clip: {fileID: 8300000, guid: c830e9bbe462e3542a3cb86e40f3554d, type: 3}
-    volume: 0.5
+    volume: 0.155
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -10867,6 +10868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b31b7055921c4249a784d4b0051c615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   blur: {fileID: 722484945}
   isWhite: 1
   manaIndicator: {fileID: 1339528183}
@@ -11884,6 +11886,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1609365131}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1411295763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1014911687495226, guid: c8a520a0721c74b44b234b49cabe111e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5135410538551535787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412052392
 GameObject:
   m_ObjectHideFlags: 0
@@ -12061,11 +12069,12 @@ MonoBehaviour:
   blur: {fileID: 722484945}
   whiteTurnImage: {fileID: 460223268}
   blackTurnImage: {fileID: 695970809}
-  cardPrefabsObject: {fileID: 1514302615}
+  cardPrefabsObject: {fileID: 1411295763}
   cardPrefabs: []
   gameMode: 0
   whiteTurn: 0
   turn: 0
+  possibleMovesMarks: []
 --- !u!1 &1455081407
 GameObject:
   m_ObjectHideFlags: 0
@@ -16461,6 +16470,15 @@ PrefabInstance:
     - target: {fileID: 4484680584215352, guid: c8a520a0721c74b44b234b49cabe111e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091392028950190347, guid: c8a520a0721c74b44b234b49cabe111e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022511100, guid: c8a520a0721c74b44b234b49cabe111e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a520a0721c74b44b234b49cabe111e, type: 3}

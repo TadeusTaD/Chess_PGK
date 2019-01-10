@@ -509,6 +509,8 @@ public class GameManager : MonoBehaviour
 
     private void SwitchTurns()
     {
+        whitePlayer.DerenderHand();
+        blackPlayer.DerenderHand();
         onNewTurn();
     }
     private void EndTurn()
