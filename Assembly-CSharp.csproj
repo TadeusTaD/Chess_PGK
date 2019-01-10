@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Board\Cards\AoeHeal.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\BaseCard.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\Berserker.cs" />
+    <Compile Include="Assets\Scripts\Board\Cards\DangerousArea.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\DrawCards.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\HealingGrounds.cs" />
     <Compile Include="Assets\Scripts\Board\Cards\LandMine.cs" />
