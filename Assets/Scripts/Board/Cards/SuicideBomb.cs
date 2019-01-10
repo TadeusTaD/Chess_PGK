@@ -43,6 +43,7 @@ public class SuicideBomb : BaseCard
             }
             hit.collider.transform.GetComponent<Field>().piece.hp = 0;
             manager.GetPlayer().manaPool -= manaCost;
+            FindObjectOfType<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
         CancelCardUse();

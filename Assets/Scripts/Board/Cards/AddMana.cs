@@ -24,6 +24,7 @@ public class AddMana : BaseCard {
 
         manager.GetPlayer().manaPool += manaValue;
         manager.GetPlayer().manaPool -= manaCost;
+        FindObjectOfType<AudioManager>().Play(this.GetType().Name);
         MoveToGraveyard();
     }
 

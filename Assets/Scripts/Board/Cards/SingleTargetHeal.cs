@@ -34,6 +34,7 @@ public class SingleTargetHeal : BaseCard {
         {
             hit.collider.transform.GetComponent<Field>().piece.hp += healValue;
             manager.GetPlayer().manaPool -= manaCost;
+            FindObjectOfType<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
         CancelCardUse();

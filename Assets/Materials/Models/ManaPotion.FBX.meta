@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d6b2f8885b62644482c3475c1e04ece
+guid: b9832dd8be25c2e4fa6502abcb63a430
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -27,12 +27,22 @@ ModelImporter:
     4300002: frame
     4300004: front
     4300006: back
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 09 - Default
+    second: {fileID: 2100000, guid: b8de2861b6f1e284481e5187d0fcd1e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 13 - Default
+    second: {fileID: 2100000, guid: 6281745c7ce7bf840865fd18ea885128, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

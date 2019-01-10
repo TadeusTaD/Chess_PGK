@@ -85,10 +85,16 @@ public class Player : MonoBehaviour
         }
         foreach (GameObject obj in hand)
         {
-
-               
-               obj.transform.localPosition = new Vector3(0,0,0);
-               obj.transform.SetParent(cardParentNodes[parentNumber], false);
+             obj.transform.localPosition = new Vector3(0,0,0);
+            try
+            {
+                obj.transform.SetParent(cardParentNodes[parentNumber], false);
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                print("EXCEPTION: DO NAPRAWIENIA");
+                print("Player: funkcja RenderHand()");
+            }
 
                 parentNumber++;
                 //obj.transform.localScale = new Vector3(obj.transform.localScale.x , obj.transform.localScale.y , obj.transform.localScale.z);

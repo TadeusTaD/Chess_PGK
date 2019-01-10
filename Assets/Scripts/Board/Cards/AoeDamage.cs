@@ -45,6 +45,7 @@ public class AoeDamage : BaseCard
             }
         }
         manager.GetPlayer().manaPool -= manaCost;
+        FindObjectOfType<AudioManager>().Play(this.GetType().Name);
         MoveToGraveyard();
         CancelCardUse();
     }

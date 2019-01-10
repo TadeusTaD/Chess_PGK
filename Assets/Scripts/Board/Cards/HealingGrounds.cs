@@ -52,6 +52,7 @@ public class HealingGrounds : BaseCard {
                 }
             }
         manager.GetPlayer().manaPool -= manaCost;
+        FindObjectOfType<AudioManager>().Play(this.GetType().Name);
         MoveToGraveyard();
         CancelCardUse();
         manager.onNewTurn += Heal;

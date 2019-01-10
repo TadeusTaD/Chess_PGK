@@ -35,6 +35,7 @@ public class SwapStats : BaseCard {
 
             manager.gameMode = Mode.idle;
             manager.GetPlayer().manaPool -= manaCost;
+            FindObjectOfType<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
         }
 
