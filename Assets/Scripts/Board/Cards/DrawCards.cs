@@ -29,7 +29,7 @@ public class DrawCards : BaseCard {
         for (int i = 0; i < cardsAmount; i++)
             manager.GetPlayer().DrawCard();
         manager.GetPlayer().manaPool -= manaCost;
-        gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
+        FindObjectOfType<AudioManager>().Play(this.GetType().Name);
         MoveToGraveyard();
     }
 

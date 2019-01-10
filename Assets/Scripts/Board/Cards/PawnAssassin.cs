@@ -37,7 +37,7 @@ public class PawnAssassin : BaseCard
             {
                 hit.collider.transform.GetComponent<Field>().piece.attack += attackBoost;
                 manager.GetPlayer().manaPool -= manaCost;
-                gameObject.GetComponent<AudioManager>().Play(this.GetType().Name);
+                FindObjectOfType<AudioManager>().Play(this.GetType().Name);
                 MoveToGraveyard();
             }
         }
