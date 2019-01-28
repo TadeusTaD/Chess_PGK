@@ -46,6 +46,8 @@ public class AoeHeal : BaseCard {
         }
         manager.GetPlayer().manaPool -= manaCost;
         FindObjectOfType<AudioManager>().Play(this.GetType().Name);
+        GameObject.Find("AoeHealingEffect").transform.position = hit.collider.transform.GetComponent<Field>().piece.transform.position;
+        GameObject.Find("AoeHealingEffect").GetComponent<ParticleSystem>().Play();
         MoveToGraveyard();
         CancelCardUse(); 
     }

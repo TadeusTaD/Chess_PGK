@@ -53,10 +53,12 @@ public class HealingGrounds : BaseCard {
             }
         manager.GetPlayer().manaPool -= manaCost;
         FindObjectOfType<AudioManager>().Play(this.GetType().Name);
+        GameObject.Find("HealingGroundEffect").transform.position = hit.collider.transform.GetComponent<Field>().piece.transform.position;
+        GameObject.Find("HealingGroundEffect").GetComponent<ParticleSystem>().Play();
         MoveToGraveyard();
         CancelCardUse();
         manager.onNewTurn += Heal;
-        ShowMarkers();
+        //ShowMarkers();
     }
     private void Heal()
     {
@@ -80,10 +82,11 @@ public class HealingGrounds : BaseCard {
     {
         manager.onNewTurn -= Heal;
 
-        foreach (GameObject obj in plusesIndicators)
-        {
-            Destroy(obj);
-        }
+        //foreach (GameObject obj in plusesIndicators)
+        //{
+        //    Destroy(obj);
+        //}
+        GameObject.Find("HealingGroundEffect").GetComponent<ParticleSystem>().Stop();
     }
 
     public void ShowMarkers()

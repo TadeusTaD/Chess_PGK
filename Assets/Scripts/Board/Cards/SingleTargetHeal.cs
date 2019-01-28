@@ -33,6 +33,8 @@ public class SingleTargetHeal : BaseCard {
         if (hit.collider.transform.GetComponent<Field>().piece != null && hit.collider.transform.GetComponent<Field>().piece.isWhite == manager.whiteTurn)
         {
             hit.collider.transform.GetComponent<Field>().piece.hp += healValue;
+            GameObject.Find("HealingEffect").transform.position = hit.collider.transform.GetComponent<Field>().piece.transform.position;
+            GameObject.Find("HealingEffect").GetComponent<ParticleSystem>().Play();
             manager.GetPlayer().manaPool -= manaCost;
             FindObjectOfType<AudioManager>().Play(this.GetType().Name);
             MoveToGraveyard();
