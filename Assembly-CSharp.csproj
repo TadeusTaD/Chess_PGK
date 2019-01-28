@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Board\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Board\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\Board\BackToMenuButton.cs" />
+    <Compile Include="Assets\Scripts\Board\BotAI.cs" />
     <Compile Include="Assets\Scripts\Board\Buttons\BackgroundChangeButton.cs" />
     <Compile Include="Assets\Scripts\Board\Buttons\GraveyardButton.cs" />
     <Compile Include="Assets\Scripts\Board\CameraShake.cs" />
