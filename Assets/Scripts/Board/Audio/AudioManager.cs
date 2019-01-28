@@ -5,6 +5,10 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public AudioClip[] themeMusic;
+    public AudioSource themeAudioSource;
+    public String themeName;
+    public bool mute;
 
     public static AudioManager instance;
 
@@ -42,6 +46,46 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Theme");
+        mute = false;
+        playRandomTheme();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            playRandomTheme();
+        }
+        if (!themeAudioSource.isPlaying)
+        {
+            playRandomTheme();
+        }
+    }
+
+    public void playRandomTheme()
+    {
+        int randClip = UnityEngine.Random.Range(0, themeMusic.Length);
+        themeAudioSource.clip = themeMusic[randClip];
+        themeAudioSource.Play();
+        themeName = getThemeName();
+    }
+
+    public String getThemeName()
+    {
+        return themeAudioSource.clip.name;
+    }
+
+    public void muteMusic()
+    {
+        if (!mute)
+        {
+            themeAudioSource.mute = true;
+            mute = true;
+        }
+        else
+        {
+            themeAudioSource.mute = false;
+            mute = false;
+        }
     }
 }
