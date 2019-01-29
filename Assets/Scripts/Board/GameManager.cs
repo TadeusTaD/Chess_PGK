@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour
 
 
         onMouseMove(hit);
-        if (Input.GetMouseButtonDown(0) && gameMode != Mode.blocked)
+        if (Input.GetMouseButtonDown(0) && gameMode != Mode.blocked && GetPlayer().type == Player.Type.Human)
             onMouseClick(hit);
     }
     public RaycastHit GetRaycastHit()

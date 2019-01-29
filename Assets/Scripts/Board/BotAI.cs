@@ -6,6 +6,8 @@ public class BotAI
 {
 	public IEnumerator MakeMove(GameManager manager)
 	{
+		yield return new WaitForSeconds(4);
+
 		bool isWhite = manager.GetPlayer().isWhite;
 		List<Field> validSelections = manager.GetAllFields().FindAll(
 			field => field.piece != null && field.piece.isWhite == isWhite
